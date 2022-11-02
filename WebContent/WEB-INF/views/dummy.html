@@ -1,0 +1,316 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <meta charset="ISO-8859-1" />
+        <title>Hi ${userid}</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,900;1,200;1,900&family=Staatliches&display=swap" rel="stylesheet" />
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                font-family: "Nunito Sans", sans-serif;
+            }
+            
+            body {
+                background-color: black;
+            }
+            
+            header {
+                background-color: rgba(128, 128, 128, 0.603);
+            }
+            
+            .Header-buttons {
+                all: unset;
+                background-color: black;
+                display: inline-block;
+                margin: 12px;
+                background-blend-mode: color-burn;
+                padding: 5px;
+                color: white;
+                border-bottom-style: revert;
+                cursor: pointer;
+            }
+            
+            p#error.Header-buttons {
+                background-color: unset;
+                color: unset;
+            }
+            
+            .Header-buttons:hover {
+                opacity: 70%;
+                border-bottom-style: none;
+            }
+            
+            .Search-bar {
+                color: white;
+            }
+            
+            #searchbar {
+                position: absolute;
+                top: 32vh;
+                left: 30vw;
+            }
+            
+            #searchbar input {
+                padding: 9px;
+                margin: 5px;
+                width: 32vw;
+            }
+            
+            #search-button {
+                all: unset;
+                padding: 6px;
+                margin: -11px;
+                cursor: pointer;
+                border-block-width: 50px;
+                border-left-width: thick;
+                border: solid;
+                border-width: 1px;
+                position: relative;
+                bottom: -1px;
+            }
+            
+            .mocie-grid {
+                display: grid;
+            }
+            
+            #error:hover {
+                text-shadow: 0 0 200px #ffffff, 0 0 80px #ffffffd4, 0 0 6px #ffffffce;
+                cursor: default;
+            }
+            
+            #error {
+                font-size: 30px;
+                color: #fff;
+                text-shadow: 0 0 80px #fff, 0 0 30px #fff, 0 0 6px #fff;
+            }
+            
+            #error span {
+                animation: upper 11s linear infinite;
+            }
+            
+            @keyframes upper {
+                0%,
+                19.999%,
+                22%,
+                62.999%,
+                64%,
+                64.999%,
+                70%,
+                100% {
+                    opacity: 0.99;
+                    opacity: 0.99;
+                    text-shadow: 0 0 80px #fff, 0 0 30px #fff, 0 0 6px #fff;
+                }
+                20%,
+                21.999%,
+                63%,
+                63.999%,
+                65%,
+                69.999% {
+                    opacity: 0.4;
+                    text-shadow: none;
+                }
+            }
+            
+            #error {
+                font-size: 30px;
+            }
+            
+            .animated-grid {
+                height: 90vh;
+                margin-bottom: 200px;
+                display: grid;
+                gap: 1rem;
+                grid-template-areas: "a b c d" "e f g h" "i i i i" "i i i i";
+                grid-template-rows: repeat(4, 35%);
+                grid-template-columns: auto auto auto auto;
+                --stagger-delay: 100ms;
+                position: relative;
+                top: 40vh;
+            }
+            
+            @keyframes cardEntrance {
+                from {
+                    opacity: 0;
+                    transform: scale(0.3);
+                    filter: hue-rotate(180deg);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                    filter: hue-rotate(0deg);
+                }
+            }
+            
+            .card {
+                background-color: rgb(36, 243, 147);
+                animation: cardEntrance 700ms ease-out;
+                animation-delay: 0s;
+                animation-fill-mode: none;
+                animation-fill-mode: backwards;
+                background-size: 331px 220px;
+                background-repeat: no-repeat;
+                background-position: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: center;
+                background: #353535;
+                background-position-x: 0%;
+                background-position-y: 0%;
+                background-repeat: repeat;
+                background-image: none;
+                background-size: auto;
+                font-size: -8px;
+                color: #fff;
+                box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
+                height: 100%;
+                width: 100%;
+                border-radius: 4px;
+                transition: all 500ms;
+                overflow: hidden;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+            
+            .card:hover {
+                box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+                transform: translateY(-3px) scale(1.1);
+            }
+            
+            .card:nth-child(1) {
+                grid-area: a;
+                animation-delay: calc(1 * var(--stagger-delay));
+            }
+            
+            .card:nth-child(2) {
+                grid-area: b;
+                animation-delay: calc(2 * var(--stagger-delay));
+            }
+            
+            .card:nth-child(3) {
+                grid-area: c;
+                animation-delay: calc(3 * var(--stagger-delay));
+            }
+            
+            .card:nth-child(4) {
+                grid-area: d;
+                animation-delay: calc(4 * var(--stagger-delay));
+            }
+            
+            .card:nth-child(5) {
+                grid-area: e;
+                animation-delay: calc(5 * var(--stagger-delay));
+            }
+            
+            .card:nth-child(6) {
+                grid-area: f;
+                animation-delay: calc(6 * var(--stagger-delay));
+            }
+            
+            .card:nth-child(7) {
+                grid-area: g;
+                animation-delay: calc(7 * var(--stagger-delay));
+            }
+            
+            .card:nth-child(8) {
+                grid-area: h;
+                animation-delay: calc(8 * var(--stagger-delay));
+            }
+            
+            .card:nth-child(9) {
+                grid-area: i;
+                animation-delay: calc(8 * var(--stagger-delay));
+            }
+            
+            div#videoyt.card {
+                box-shadow: 0;
+                transform: none;
+            }
+            
+            div.card {
+                font-size: 0;
+            }
+            
+            div.card:hover {
+                font-size: 50px;
+            }
+            
+            a {
+                text-decoration: none;
+                color: white;
+            }
+            
+            #dummy {
+                color: white;
+                position: absolute;
+                top: 192vh;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <p id="error" class="Header-buttons">
+                M<span>o</span><span>vi</span><span>e</span> Mas<span>al</span>a
+            </p>
+            <button class="Header-buttons"><a href="Logout">Logout</a></button>
+            <button class="Header-buttons">My Reviews</button>
+            <button class="Header-buttons">Reset Password</button>
+        </header>
+        <section class="Search-bar">
+            <div id="searchbar">
+                <form action="MemberSearch" id="searchform">
+                    <label for="search">You Can Enter Language, Movie Name, Actor Name, Actress<br />
+            Name,etc. </label
+          ><br />
+          <input
+            type="search"
+            name="search"
+            placeholder="Enter Anything Mentioned Above"
+          />
+          <button type="submit" id="search-button">Search </button>
+        </form>
+      </div>
+    </section>
+    <section class="animated-grid">
+      <div class="card" style="background-image:url('posters/ZD6HK.jpg');">Aspirants</div>
+      <div class="card" style="background-image:url('posters/ZD6HK.jpg');">b</div>
+      <div class="card" style="background-image:url('posters/ZD6HK.jpg');">c</div>
+      <div class="card" style="background-image:url('posters/ZD6HK.jpg');">d</div>
+      <div class="card">e</div>
+      <div class="card">f</div>
+      <div class="card">g</div>
+      <div class="card">h</div>
+      <div class="card" id="videoyt"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/zSWdZVtXT7E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      
+          </section>
+    <div id="dummy">
+      <c:if test="${not empty poster}">
+
+                                <h2>Information About Movie.</h2>
+
+                                <c:forEach var="P" items="${poster}">
+                                    <p> <label for="id">Filmid :</label></p>
+                    <input type="text" class="search" value="${P.filmname}" name="id" readonly>
+
+                    <li>${P.filmname}</li>
+
+                    <li>${P.filmid}</li>
+
+
+                    </c:forEach>
+                    </c:if>
+
+            </div>
+    </body>
+
+    </html>
